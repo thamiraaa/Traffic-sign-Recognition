@@ -1,0 +1,131 @@
+{
+    "intro_system_name": {
+        "en": "AUTO BANK KIOSK"
+    },
+    "intro_subtitle": {
+        "en": "Smart Form Filling & Assistance System"
+    },
+    "intro_select_lang": {
+        "en": "Select Your Language"
+    },
+    "intro_welcome": {
+        "en": "Welcome to Auto Bank"
+    },
+    "intro_instruction": {
+        "en": "Please touch the screen to select a language and begin."
+    },
+    "btn_back": {
+        "en": "Back"
+    },
+    "btn_start_over": {
+        "en": "Start Over"
+    },
+    "btn_continue": {
+        "en": "Continue"
+    },
+    "select_service": {
+        "en": "Select Banking Service"
+    },
+    "touch_picture": {
+        "en": "Touch the picture that matches the service you need"
+    },
+    "lbl_cash_services": {
+        "en": "Cash Services"
+    },
+    "lbl_non_cash_services": {
+        "en": "Non-Cash Services"
+    },
+    "scan_title": {
+        "en": "Document Scanner"
+    },
+    "scan_instr": {
+        "en": "Please place your {doc} on the scanner"
+    },
+    "scan_btn": {
+        "en": "Scan Document"
+    },
+    "status_scanning": {
+        "en": "Scanning..."
+    },
+    "status_success": {
+        "en": "Success!"
+    },
+    "trk_title": {
+        "en": "Required Documents"
+    },
+    "trk_instr": {
+        "en": "Please scan the following documents one by one"
+    },
+    "denom_title": {
+        "en": "Enter Amount"
+    },
+    "denom_instr": {
+        "en": "Enter the amount you wish to process"
+    },
+    "confirm_title": {
+        "en": "Final Preview"
+    },
+    "confirm_instr": {
+        "en": "Review your details before printing"
+    },
+    "btn_print": {
+        "en": "Print Form"
+    },
+    "receipt_title": {
+        "en": "Printing Complete"
+    },
+    "receipt_instr": {
+        "en": "Please collect your printed form."
+    },
+    "missing_title": {
+        "en": "Provide Missing Details"
+    },
+    "missing_instr": {
+        "en": "Please fill in the fields that couldn't be scanned."
+    },
+    "doc_aadhaar": {
+        "en": "Aadhaar Card"
+    },
+    "doc_pan": {
+        "en": "PAN Card"
+    },
+    "doc_passbook": {
+        "en": "Passbook"
+    },
+    "field_name": {
+        "en": "Full Name"
+    },
+    "field_account_no": {
+        "en": "Account Number"
+    },
+    "field_amount": {
+        "en": "Amount (\u20b9)"
+    },
+    "field_mobile": {
+        "en": "Mobile Number"
+    },
+    "field_branch": {
+        "en": "Branch Name"
+    },
+    "field_ifsc": {
+        "en": "IFSC Code"
+    },
+    "field_beneficiary_name": {
+        "en": "Beneficiary Name"
+    },
+    "field_beneficiary_acc": {
+        "en": "Beneficiary A/C"
+    },
+    "field_beneficiary_ifsc": {
+        "en": "Beneficiary IFSC"
+    },
+    "field_payable_at": {
+        "en": "Payable At"
+    },
+    "printing_msg": {
+        "en": "Printing Form..."
+    },
+    "Denomination": {
+        "en": "Denomination"
+    }
+}

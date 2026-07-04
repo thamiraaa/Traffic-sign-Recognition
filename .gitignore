@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Distribution / packaging
+.eggs/
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# Sensitive / personal data — never commit these
+config_secret.py
+
+# Large test images / generated PDFs (keep out of repo)
+*.jpeg
+*.jpg
+*.png
+*.bmp
+*.tiff
+*.pdf
+
+# Temporary files
+*.tmp
+*.log
+test_gemini.py
+
+# Database (contains customer transaction data)
+kiosk_transactions.db

@@ -1,0 +1,147 @@
+class LanguageScreen(BaseScreen):
+
+    def __init__(self, parent, app):
+        super().__init__(parent, app)
+        self._ticker_idx = 0
+        self._pulse_dir  = 1
+        self._pulse_val  = 0
+        self._lang_frames = []
+        self._build()
+
+    # ââ Services ticker for the top marquee ââââââââââââââ
+    _TICKER_ITEMS = [
+        "ð¸  Cash Withdrawal",   "ðµ  Cash Deposit",
+        "ð¦  NEFT / RTGS",       "ð  Demand Draft",
+        "ð¤  Account Opening",   "ð³  ATM Card Request",
+        "ð±  Mobile Update",     "ð   Address Change",
+        "ðªª  KYC Update",        "ð  Cheque Book",
+    ]
+
+    def _build(self):
+        # ââ Hero Header ââââââââââââââââââââââââââââââââââ
+        hero = ctk.CTkFrame(self, fg_color="#0D2B6E", corner_radius=0)
+        hero.pack(fill="x", ipady=0)
+
+        # Top accent line
+        ctk.CTkFrame(hero, fg_color="#F5A623", height=5, corner_radius=0).pack(fill="x")
+
+        inner = ctk.CTkFrame(hero, fg_color="transparent")
+        inner.pack(fill="x", padx=30, pady=12)
+
+        # Bank icon + title side by side
+        ctk.CTkLabel(inner, text="ðï¸",
+                     font=ctk.CTkFont(size=52)).pack(side="left", padx=(0, 16))
+
+        txt_col = ctk.CTkFrame(inner, fg_color="transparent")
+        txt_col.pack(side="left", fill="both")
+        ctk.CTkLabel(txt_col,
+                     text="AUTO BANK FORM FILLING SYSTEM",
+                     font=ctk.CTkFont(family=config.FONT_FAMILY, size=26, weight="bold"),
+                     text_color="#FFFFFF").pack(anchor="w")
+        ctk.CTkLabel(txt_col,
+                     text="AI-Powered Kiosk  â¢  100% Accurate  â¢  Multilingual",
+                     font=ctk.CTkFont(family=config.FONT_FAMILY, size=13),
+                     text_color="#A8C4F0").pack(anchor="w", pady=(2, 0))
+
+        # ââ Scrolling services ticker âââââââââââââââââââââ
+        ticker_bar = ctk.CTkFrame(self, fg_color="#1A4A9E", corner_radius=0, height=36)
+        ticker_bar.pack(fill="x")
+        ticker_bar.pack_propagate(False)
+        self._ticker_lbl = ctk.CTkLabel(
+            ticker_bar, text="",
+            font=ctk.CTkFont(family=config.FONT_FAMILY, size=14, weight="bold"),
+            text_color="#FFD700")
+        self._ticker_lbl.pack(expand=True)
+
+        # ââ Feature badges row ââââââââââââââââââââââââââââ
+        badge_bar = ctk.CTkFrame(self, fg_color="#EFF6FF", corner_radius=0, height=44)
+        badge_bar.pack(fill="x")
+        for icon, txt in [("ð", "Secure"), ("â¡", "Fast"), ("ð¯", "Accurate"), ("ð", "Multilingual"), ("ð¨ï¸", "Auto-Print")]:
+            b = ctk.CTkFrame(badge_bar, fg_color="#DBEAFE", corner_radius=20)
+            b.pack(side="left", padx=10, pady=6)
+            ctk.CTkLabel(b, text=f" {icon} {txt} ",
+                         font=ctk.CTkFont(family=config.FONT_FAMILY, size=12, weight="bold"),
+                         text_color="#1E40AF").pack(padx=4, pady=2)
+
+        # ââ Language selection area âââââââââââââââââââââââ
+        content = ctk.CTkFrame(self, fg_color="transparent")
+        content.pack(fill="both", expand=True, padx=50, pady=10)
+
+        # Pulsing "Touch to begin" label
+        self._touch_lbl = ctk.CTkLabel(
+            content,
+            text="ð  TOUCH YOUR LANGUAGE TO BEGIN  ð",
+            font=ctk.CTkFont(family=config.FONT_FAMILY, size=19, weight="bold"),
+            text_color="#0D2B6E")
+        self._touch_lbl.pack(pady=(0, 16))
+
+        # Language grid
+        grid = ctk.CTkFrame(content, fg_color="transparent")
+        grid.pack()
+
+        langs = list(config.LANGUAGES.items())
+        for idx, (code, info) in enumerate(langs):
+            row, col = divmod(idx, 3)
+            self._lang_button(grid, code, info).grid(row=row, column=col, padx=18, pady=12)
+
+        # ââ Bottom strip ââââââââââââââââââââââââââââââââââ
+        foot = ctk.CTkFrame(self, fg_color="#0D2B6E", corner_radius=0, height=30)
+        foot.pack(fill="x", side="bottom")
+        ctk.CTkLabel(foot,
+                     text="â Aadhaar  â¢  â PAN Card  â¢  â Bank Passbook  â  Form Auto-Filled & Printed",
+                     font=ctk.CTkFont(family=config.FONT_FAMILY, size=11),
+                     text_color="#A8C4F0").pack(expand=True)
+
+    def _lang_button(self, parent, code: str, info: dict):
+        frame = ctk.CTkFrame(parent,
+                             fg_color="white",
+                             border_width=3,
+                             border_color="#CBD5E1",
+                             corner_radius=18,
+                             width=230, height=150,
+                             cursor="hand2")
+        frame.grid_propagate(False)
+
+        ctk.CTkLabel(frame, text=info["flag"],
+                     font=ctk.CTkFont(size=46)).pack(pady=(14, 0))
+        ctk.CTkLabel(frame, text=info["native"],
+                     font=ctk.CTkFont(family=config.FONT_FAMILY, size=22, weight="bold"),
+                     text_color="#0D2B6E").pack(pady=(3, 0))
+        ctk.CTkLabel(frame, text=info["name"],
+                     font=ctk.CTkFont(family=config.FONT_FAMILY, size=12),
+                     text_color="#64748B").pack()
+
+        def _enter(e, f=frame):
+            f.configure(border_color="#0D2B6E", border_width=4, fg_color="#EFF6FF")
+
+        def _leave(e, f=frame):
+            f.configure(border_color="#CBD5E1", border_width=3, fg_color="white")
+
+        def _select(c=code, f=frame):
+            self.app.language.set(c)
+            for child in getattr(self, "_lang_frames", []):
+                child.configure(border_color=config.COLOR_SUCCESS if child is f else config.COLOR_GLASS_BORDER,
+                                border_width=4 if child is f else 2)
+            tts_engine.speak_script("language_selected", c)
+            # Navigate to Coin Payment Screen (Step 2)
+            self.after(1200, lambda: self.app.show_screen("CoinScreen"))
+
+        for w in [frame] + list(frame.winfo_children()):
+            w.bind("<Button-1>", lambda e, fn=_select: fn())
+
+        if not hasattr(self, "_lang_frames"):
+            self._lang_frames = []
+        self._lang_frames.append(frame)
+        return frame
+
+    def on_show(self):
+        for f in getattr(self, "_lang_frames", []):
+            f.configure(border_color=config.COLOR_GLASS_BORDER, border_width=2)
+        tts_engine.speak_script("welcome", "en")
+
+
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Screen 2 â Coin Payment
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+
+
